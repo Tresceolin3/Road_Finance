@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "152509724241",
+    "project_id": "road-finance-1381c",
+    "storage_bucket": "road-finance-1381c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152509724241:android:c7f3f91308c58a90746a70",
+        "android_client_info": {
+          "package_name": "com.example.roadfinance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152509724241-fbu654arcc0kd5joslaglidmnm0um94i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.roadfinance",
+            "certificate_hash": "3fc0ae88b810f0c4756168ba0897fa253443ec5c"
+          }
+        },
+        {
+          "client_id": "152509724241-1edj98tafsdtftlg2hhcnnqaatcdumdu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo91Xjf3qDh1M2e3NMQr4KYGs7HCRVlQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152509724241-1edj98tafsdtftlg2hhcnnqaatcdumdu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#63B288</color>
+    <color name="colorPrimaryDark">#FDB94C</color>
+    <color name="colorAccent">#FDB94C</color>
+    <color name="verde_road_finance">#63B288</color>
+    <color name="laranja_road_finance">#FDB94C</color>
+</resources>
