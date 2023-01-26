@@ -9,14 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.activity.cadastrar3Activity"></activity>
-        <activity android:name=".activity.activity.cadastrar2Activity"/>
+        <activity
+            android:name=".activity.activity.PrincipalActivity"
+            android:label="@string/title_activity_principal"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.activity.cadastrar3Activity" />
+        <activity android:name=".activity.activity.cadastrar2Activity" />
         <activity android:name=".activity.activity.cadastrarActivity" />
         <activity android:name=".activity.activity.loginActivity" />
         <activity
             android:name=".activity.activity.MainActivity"
-            android:theme="@style/Theme.Intro"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

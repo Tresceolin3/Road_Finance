@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Road Finance</string>
+    <string name="title_activity_principal">PrincipalActivity</string>
 </resources>

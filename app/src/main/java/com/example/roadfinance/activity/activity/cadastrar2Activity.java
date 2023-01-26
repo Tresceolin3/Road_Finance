@@ -18,6 +18,10 @@ public class cadastrar2Activity extends AppCompatActivity {
 
     public void buttonSenha(View view){
         startActivity(new Intent(this, cadastrar3Activity.class));
+         fecharCadastrar2Activity();
     }
 
+    public void fecharCadastrar2Activity(){
+        finish();
+    }
 }

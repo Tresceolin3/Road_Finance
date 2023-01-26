@@ -3,6 +3,7 @@ package com.example.roadfinance.activity.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -72,10 +73,7 @@ public class loginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(
-                            loginActivity.this,
-                            "Sucesso ao realizar o login",
-                            Toast.LENGTH_SHORT).show();
+                    abrirTelaPrincipal();
                 } else {
                     String exececao = "";
                     try {
@@ -97,4 +95,10 @@ public class loginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void abrirTelaPrincipal(){
+        startActivity(new Intent(this,PrincipalActivity.class));
+        finish();
+    }
+
 }

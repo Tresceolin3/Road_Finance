@@ -23,6 +23,10 @@ public class cadastrarActivity extends AppCompatActivity {
 
     public void btProximo(View view){
         startActivity(new Intent(this, cadastrar2Activity.class));
+        fecharCadastrarActivity();
     }
 
+    public void fecharCadastrarActivity(){
+        finish();
+    }
 }

@@ -5,4 +5,15 @@
     <color name="colorAccent">#FDB94C</color>
     <color name="verde_road_finance">#63B288</color>
     <color name="laranja_road_finance">#FDB94C</color>
+
+
+    <color name="colorPrimaryDespesa">#FFEB3B</color>
+    <color name="colorPrimaryDarkDespesa">#C0A800</color>
+    <color name="colorAccentDespesa">#FFEB3B</color>
+
+    <color name="colorPrimaryReceita">#63B288</color>
+    <color name="colorPrimaryDarkReceita">#00794D</color>
+    <color name="colorAccentReceita">#63B288</color>
+
+
 </resources>

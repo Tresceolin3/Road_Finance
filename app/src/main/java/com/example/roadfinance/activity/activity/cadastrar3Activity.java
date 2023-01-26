@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,8 @@ public class cadastrar3Activity extends AppCompatActivity {
     private Button botaoCadastrarFinal;
     private FirebaseAuth autenticacao;
     private Usuario usuario;
+    private cadastrar2Activity cadastrar2Activity;
+    private cadastrarActivity cadastrarActivity;
 
 
     @Override
@@ -90,9 +93,10 @@ public class cadastrar3Activity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(cadastrar3Activity.this,
-                            "Sucesso ao cadastrar o usuário",
-                            Toast.LENGTH_SHORT).show();
+                   finish();
+                   //cadastrar2Activity.fecharCadastrar2Activity();
+                   //cadastrarActivity.fecharCadastrarActivity();
+
                 } else {
                     String exececao = "";
                     try {
@@ -115,6 +119,8 @@ public class cadastrar3Activity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }
 
