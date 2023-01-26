@@ -32,6 +32,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public  void adicionarReceita(View view){
+        //testando git
 
     }
 
