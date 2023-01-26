@@ -1,5 +1,6 @@
 package com.example.roadfinance.activity.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,12 +33,12 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public  void adicionarReceita(View view){
-        //testando git
+       startActivity(new Intent(this,ReceitasActivity.class));
 
     }
 
     public  void adicionarDespesa(View view){
-
+        startActivity(new Intent(this,DespesasActivity.class));
     }
 
 }

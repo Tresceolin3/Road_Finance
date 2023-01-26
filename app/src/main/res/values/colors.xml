@@ -7,9 +7,9 @@
     <color name="laranja_road_finance">#FDB94C</color>
 
 
-    <color name="colorPrimaryDespesa">#FFEB3B</color>
-    <color name="colorPrimaryDarkDespesa">#C0A800</color>
-    <color name="colorAccentDespesa">#FFEB3B</color>
+    <color name="colorPrimaryDespesa">#FDBB53</color>
+    <color name="colorPrimaryDarkDespesa">#CC8B03</color>
+    <color name="colorAccentDespesa">#FDBB53</color>
 
     <color name="colorPrimaryReceita">#63B288</color>
     <color name="colorPrimaryDarkReceita">#00794D</color>
