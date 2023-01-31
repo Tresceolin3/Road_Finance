@@ -52,12 +52,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/buttonConfirmarEndereço"
+        android:id="@+id/buttonConfirmaDados2"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="buttonSenha"
+        android:onClick="RepassarDados"
         android:text="Confirmar"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,7 +105,7 @@
         android:ems="10"
         android:hint="Bairro"
         android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmarEndereço"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmaDados2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNumero" />

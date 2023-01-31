@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roadfinance.R;
 import com.example.roadfinance.activity.config.ConfiguraçaoFirebase;
+import com.example.roadfinance.activity.helper.Base64Custom;
 import com.example.roadfinance.activity.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,11 +27,10 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 public class cadastrar3Activity extends AppCompatActivity {
 
     private EditText campoSenha, campoEmail, campoSenha2;
+    private TextView textTest;
     private Button botaoCadastrarFinal;
     private FirebaseAuth autenticacao;
     private Usuario usuario;
-    private cadastrar2Activity cadastrar2Activity;
-    private cadastrarActivity cadastrarActivity;
 
 
     @Override
@@ -42,8 +43,13 @@ public class cadastrar3Activity extends AppCompatActivity {
         campoSenha2 = findViewById(R.id.editSenha2);
         campoEmail = findViewById(R.id.editEmail);
 
-        botaoCadastrarFinal = findViewById(R.id.buttonCadastrarSenha);
+        //Recuperando dados
+        textTest = findViewById(R.id.textViewTeste);
+        final String nome = getIntent().getStringExtra("nome");
+        textTest.setText(nome);
 
+
+        botaoCadastrarFinal = findViewById(R.id.buttonCadastrarSenha);
         botaoCadastrarFinal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,34 +57,38 @@ public class cadastrar3Activity extends AppCompatActivity {
                 String textSenha = campoSenha.getText().toString();
                 String textSenha2 = campoSenha2.getText().toString();
 
+
                 //Validar os campos
-                if (!textEmail.isEmpty()) {
-                    if (!textSenha.isEmpty()) {
-                        if (!textSenha2.isEmpty()) {
-                            if ((textSenha2.equals(textSenha)) == true) {
-                                usuario = new Usuario();
-                                usuario.setEmail(textEmail);
-                                usuario.setSenha(textSenha);
-                                cadastrarUsuario();
+                if (!nome.isEmpty()) {
+                    if (!textEmail.isEmpty()) {
+                        if (!textSenha.isEmpty()) {
+                            if (!textSenha2.isEmpty()) {
+                                if ((textSenha2.equals(textSenha)) == true) {
+                                    usuario = new Usuario();
+                                    usuario.setNome(nome);
+                                    usuario.setEmail(textEmail);
+                                    usuario.setSenha(textSenha);
+                                    cadastrarUsuario();
+                                } else {
+                                    Toast.makeText(cadastrar3Activity.this,
+                                            "Senhas diferentes!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 Toast.makeText(cadastrar3Activity.this,
-                                        "Senhas diferentes!",
+                                        "Preencha a senha",
                                         Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(cadastrar3Activity.this,
-                                    "Preencha a senha",
+                                    "Preencha a senha!",
                                     Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(cadastrar3Activity.this,
-                                "Preencha a senha!",
+                                "Preencha o E-mail",
                                 Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(cadastrar3Activity.this,
-                            "Preencha o E-mail",
-                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -86,17 +96,19 @@ public class cadastrar3Activity extends AppCompatActivity {
     }
 
     public void cadastrarUsuario() {
+
         autenticacao = ConfiguraçaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 usuario.getEmail(), usuario.getSenha()
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                   finish();
-                   //cadastrar2Activity.fecharCadastrar2Activity();
-                   //cadastrarActivity.fecharCadastrarActivity();
 
+                if (task.isSuccessful()) {
+                    String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+                    usuario.setIdUsuario(idUsuario);
+                    usuario.salvar();
+                    finish();
                 } else {
                     String exececao = "";
                     try {
@@ -118,8 +130,8 @@ public class cadastrar3Activity extends AppCompatActivity {
                 }
             }
         });
-    }
 
+    }
 
 
 }
