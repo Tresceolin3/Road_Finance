@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.activity.cadastrar2Activity"
+    tools:context=".activity.activity.cadastrarTwoActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-3dp">
 
@@ -75,13 +75,13 @@
         android:ems="10"
         android:hint="Rua"
         android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editNumero"
+        app:layout_constraintBottom_toTopOf="@+id/editNrua"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCidade" />
 
     <EditText
-        android:id="@+id/editNumero"
+        android:id="@+id/editNrua"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -108,6 +108,6 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonConfirmaDados2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNumero" />
+        app:layout_constraintTop_toBottomOf="@+id/editNrua" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,14 +8,30 @@ public class Usuario {
 
     private String idUsuario;
     private String nome;
+    private String sobre_nome;
     private String email;
     private String senha;
+    private String cpf;
+    private String data_nasc;
+    private String celular;
+    private Endereco endereco;
     private Double despesaTotal = 0.00;
     private Double receitaTotal = 0.00;
 
     public Usuario() {
     }
 
+    public Usuario(String nome, String sobre_nome, String email, String senha,
+                   String cpf, String data_nasc, String celular, Endereco endereco) {
+        this.nome = nome;
+        this.sobre_nome = sobre_nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.data_nasc = data_nasc;
+        this.celular = celular;
+        this.endereco = endereco;
+    }
 
     public void salvar() {
         DatabaseReference firebase = ConfiguraçaoFirebase.getFirebaseDatabase();
@@ -32,6 +48,14 @@ public class Usuario {
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public String getNome() {
@@ -74,5 +98,37 @@ public class Usuario {
 
     public void setReceitaTotal(Double receitaTotal) {
         this.receitaTotal = receitaTotal;
+    }
+
+    public String getSobre_nome() {
+        return sobre_nome;
+    }
+
+    public void setSobre_nome(String sobre_nome) {
+        this.sobre_nome = sobre_nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getData_nasc() {
+        return data_nasc;
+    }
+
+    public void setData_nasc(String data_nasc) {
+        this.data_nasc = data_nasc;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 }

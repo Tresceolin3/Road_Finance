@@ -4,17 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roadfinance.R;
 import com.example.roadfinance.activity.config.ConfiguraçaoFirebase;
 import com.example.roadfinance.activity.helper.Base64Custom;
+import com.example.roadfinance.activity.helper.MyApplication;
+import com.example.roadfinance.activity.model.Endereco;
 import com.example.roadfinance.activity.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,30 +24,23 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-public class cadastrar3Activity extends AppCompatActivity {
+public class cadastrarTreeActivity extends AppCompatActivity {
 
-    private EditText campoSenha, campoEmail, campoSenha2;
-    private TextView textTest;
+    private EditText campoSenha, campoEmail, campoSenhaTwo;
     private Button botaoCadastrarFinal;
     private FirebaseAuth autenticacao;
     private Usuario usuario;
+    private Endereco endereco;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar3);
-
+        setContentView(R.layout.activity_cadastrar_tree);
 
         campoSenha = findViewById(R.id.editSenha1);
-        campoSenha2 = findViewById(R.id.editSenha2);
+        campoSenhaTwo = findViewById(R.id.editSenha2);
         campoEmail = findViewById(R.id.editEmail);
-
-        //Recuperando dados
-        textTest = findViewById(R.id.textViewTeste);
-        final String nome = getIntent().getStringExtra("nome");
-        textTest.setText(nome);
-
 
         botaoCadastrarFinal = findViewById(R.id.buttonCadastrarSenha);
         botaoCadastrarFinal.setOnClickListener(new View.OnClickListener() {
@@ -55,40 +48,51 @@ public class cadastrar3Activity extends AppCompatActivity {
             public void onClick(View v) {
                 String textEmail = campoEmail.getText().toString();
                 String textSenha = campoSenha.getText().toString();
-                String textSenha2 = campoSenha2.getText().toString();
-
+                String textSenhaV = campoSenhaTwo.getText().toString();
 
                 //Validar os campos
-                if (!nome.isEmpty()) {
-                    if (!textEmail.isEmpty()) {
-                        if (!textSenha.isEmpty()) {
-                            if (!textSenha2.isEmpty()) {
-                                if ((textSenha2.equals(textSenha)) == true) {
-                                    usuario = new Usuario();
-                                    usuario.setNome(nome);
-                                    usuario.setEmail(textEmail);
-                                    usuario.setSenha(textSenha);
-                                    cadastrarUsuario();
-                                } else {
-                                    Toast.makeText(cadastrar3Activity.this,
-                                            "Senhas diferentes!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+                if (!textEmail.isEmpty()) {
+                    if (!textSenha.isEmpty()) {
+                        if (!textSenhaV.isEmpty()) {
+                            if ((textSenhaV.equals(textSenha)) == true) {
+                                usuario = new Usuario();
+
+                                usuario.setNome(MyApplication.getInstance().getNome());
+                                usuario.setSobre_nome(MyApplication.getInstance().getSobreNome());
+                                usuario.setCpf(MyApplication.getInstance().getCpf());
+                                usuario.setData_nasc(MyApplication.getInstance().getDataNas());
+                                usuario.setCelular(MyApplication.getInstance().getCelular());
+
+                                endereco = new Endereco();
+                                endereco.setCep(MyApplication.getInstance().getCep());
+                                endereco.setCidade(MyApplication.getInstance().getCidade());
+                                endereco.setRua(MyApplication.getInstance().getRua());
+                                endereco.setNrua(MyApplication.getInstance().getNRua());
+                                endereco.setBairro(MyApplication.getInstance().getBairro());
+                                usuario.setEndereco(endereco);
+
+                                usuario.setEmail(textEmail);
+                                usuario.setSenha(textSenha);
+                                cadastrarUsuario();
                             } else {
-                                Toast.makeText(cadastrar3Activity.this,
-                                        "Preencha a senha",
+                                Toast.makeText(cadastrarTreeActivity.this,
+                                        "Senhas diferentes!",
                                         Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(cadastrar3Activity.this,
-                                    "Preencha a senha!",
+                            Toast.makeText(cadastrarTreeActivity.this,
+                                    "Preencha a senha",
                                     Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(cadastrar3Activity.this,
-                                "Preencha o E-mail",
+                        Toast.makeText(cadastrarTreeActivity.this,
+                                "Preencha a senha!",
                                 Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(cadastrarTreeActivity.this,
+                            "Preencha o E-mail",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -124,7 +128,7 @@ public class cadastrar3Activity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    Toast.makeText(cadastrar3Activity.this,
+                    Toast.makeText(cadastrarTreeActivity.this,
                             exececao,
                             Toast.LENGTH_SHORT).show();
                 }
