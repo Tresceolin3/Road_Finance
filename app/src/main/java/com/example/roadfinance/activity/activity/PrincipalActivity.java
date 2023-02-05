@@ -3,9 +3,6 @@ package com.example.roadfinance.activity.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -39,6 +36,10 @@ public class PrincipalActivity extends AppCompatActivity {
 
     public  void adicionarDespesa(View view){
         startActivity(new Intent(this,DespesasActivity.class));
+    }
+
+    public void adicionarTruck(View view){
+        startActivity(new Intent(this, CadastrarTruckActivity.class));
     }
 
 }
