@@ -21,18 +21,6 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nome, String sobre_nome, String email, String senha,
-                   String cpf, String data_nasc, String celular, Endereco endereco) {
-        this.nome = nome;
-        this.sobre_nome = sobre_nome;
-        this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.data_nasc = data_nasc;
-        this.celular = celular;
-        this.endereco = endereco;
-    }
-
     public void salvar() {
         DatabaseReference firebase = ConfiguraçaoFirebase.getFirebaseDatabase();
         firebase.child("usuarios")

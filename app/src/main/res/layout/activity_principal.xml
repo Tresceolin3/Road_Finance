@@ -32,16 +32,7 @@
         app:menu_colorNormal="@color/colorAccent"
         app:menu_colorPressed="@color/colorAccent">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menuTruck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="adicionarTruck"
-            app:srcCompat="@drawable/ic_truck_white_24dp"
-            fab:fab_colorNormal="@color/colorPrimaryReceita"
-            fab:fab_label="Receita"
-            fab:fab_size="mini"
-            fab:srcCompat="@drawable/ic_add_branco_24dp" />
+
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_despesa"
@@ -62,6 +53,16 @@
             app:fab_colorNormal="@color/colorPrimaryReceita"
             app:fab_label="Receita"
             app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_truck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="adicionarTruck"
+            fab:fab_colorNormal="@color/colorPrimaryReceita"
+            fab:fab_label="Caminhao"
+            fab:fab_size="mini"
+            fab:srcCompat="@drawable/ic_add_branco_24dp" />
 
     </com.github.clans.fab.FloatingActionMenu>
 

@@ -8,6 +8,7 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-3dp">
 
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -45,7 +46,7 @@
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Eixos"
-        android:inputType="phone"
+        android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/buttonConfirma"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +61,7 @@
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Quilometragem"
-        android:inputType="date"
+        android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/editEixos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +75,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:onClick="salvarCaminhao"
+        app:backgroundTint="@color/colorAccentReceita"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +95,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Placa"
-        android:inputType="number"
+        android:inputType="textWebPassword"
         app:layout_constraintBottom_toTopOf="@+id/editQuilometragem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +113,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Ano"
-        android:inputType="textPersonName"
+        android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/editPlaca"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

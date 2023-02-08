@@ -15,6 +15,7 @@ public class CadastrarTruckActivity extends AppCompatActivity {
     private EditText campoModelo, campoAno, campoPlaca, campoQuilometragrem, campoEixo;
     private Caminhao caminhao;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_truck);
@@ -42,9 +43,8 @@ public class CadastrarTruckActivity extends AppCompatActivity {
             caminhao.setPlaca(campoPlaca.getText().toString());
             caminhao.setQuilometragem(campoQuilometragrem.getText().toString());
             caminhao.setEixo(campoEixo.getText().toString());
-
-
             caminhao.Salvar();
+            finish();
         }
     }
 
