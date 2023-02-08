@@ -42,4 +42,8 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(new Intent(this, CadastrarTruckActivity.class));
     }
 
+    public void adicionarEmpresa(View view){
+        startActivity(new Intent(this, CadastarEmpresaActivity.class));
+    }
+
 }
