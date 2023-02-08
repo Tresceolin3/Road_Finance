@@ -65,6 +65,7 @@
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
 
+<<<<<<< HEAD
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/empresa"
             android:layout_width="wrap_content"
@@ -75,6 +76,8 @@
             app:fab_label="Empresa"
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
+=======
+>>>>>>> 3b78b28b00134bc582adba22ec1715a82c8b89c9
 
     </com.github.clans.fab.FloatingActionMenu>
 
