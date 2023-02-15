@@ -10,7 +10,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -65,7 +66,7 @@
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
 
-<<<<<<< HEAD
+
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/empresa"
             android:layout_width="wrap_content"
@@ -76,8 +77,6 @@
             app:fab_label="Empresa"
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
-=======
->>>>>>> 3b78b28b00134bc582adba22ec1715a82c8b89c9
 
     </com.github.clans.fab.FloatingActionMenu>
 

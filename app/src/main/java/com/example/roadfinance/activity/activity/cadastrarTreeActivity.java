@@ -38,6 +38,9 @@ public class cadastrarTreeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_tree);
 
+        //nomear a tullbar
+        //getSupportActionBar().setTitle("Cadastro");
+
         campoSenha = findViewById(R.id.editSenha1);
         campoSenhaTwo = findViewById(R.id.editSenha2);
         campoEmail = findViewById(R.id.editEmail);

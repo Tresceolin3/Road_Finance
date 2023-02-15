@@ -64,6 +64,7 @@ public class ReceitasActivity extends AppCompatActivity {
             atualizarReceita(receitaAtualiazada);
 
             movimentacao.Salvar(data);
+            finish();
         }
     }
 

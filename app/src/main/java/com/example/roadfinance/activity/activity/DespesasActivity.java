@@ -65,6 +65,7 @@ public class DespesasActivity extends AppCompatActivity {
             atualizarDespesa(despesaAtualiazada);
 
             movimentacao.Salvar(data);
+            finish();
         }
     }
 
