@@ -6,10 +6,13 @@ import com.example.roadfinance.activity.helper.DateUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.Stack;
+
 public class Movimentacao {
 
     private String date, categoria, descricao, tipo;
     private Double valor;
+    private String key;
 
     public Movimentacao() {
 
@@ -28,6 +31,14 @@ public class Movimentacao {
                 .child(mesAno)
                 .push()
                 .setValue(this);
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getDate() {
