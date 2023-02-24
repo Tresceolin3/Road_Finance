@@ -2,12 +2,14 @@ package com.example.roadfinance.activity.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,7 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class PrincipalActivity extends AppCompatActivity {
     private MaterialCalendarView calendarView;
@@ -74,7 +77,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
         calendarView = findViewById(R.id.calendarView);
         configuraCalenderView();
-        swipe();
 
         recyclerView = findViewById(R.id.recyclerMovimento);
 
@@ -85,16 +87,17 @@ public class PrincipalActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterMovimentacao);
+        swipe();
     }
 
-    public void swipe() {
+    public void swipe(){
 
         ItemTouchHelper.Callback itemTouch = new ItemTouchHelper.Callback() {
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 
                 int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
-                int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
                 return makeMovementFlags(dragFlags, swipeFlags);
             }
 
@@ -105,11 +108,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                excluirMovimentação(viewHolder);
+                excluirMovimentação( viewHolder );
             }
         };
 
-        new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
+        new ItemTouchHelper( itemTouch ).attachToRecyclerView( recyclerView );
 
     }
 
@@ -288,7 +291,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void adicionarTruck(View view) {
-        startActivity(new Intent(this, CadastrarTruckActivity.class));
+        startActivity(new Intent(this, CadastrarVeiculoActivity.class));
     }
 
     public void adicionarEmpresa(View view) {

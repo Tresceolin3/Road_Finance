@@ -8,17 +8,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.roadfinance.R;
-import com.example.roadfinance.activity.model.Caminhao;
+import com.example.roadfinance.activity.model.Veiculo;
 
-public class CadastrarTruckActivity extends AppCompatActivity {
+public class CadastrarVeiculoActivity extends AppCompatActivity {
 
     private EditText campoModelo, campoAno, campoPlaca, campoQuilometragrem, campoEixo;
-    private Caminhao caminhao;
+    private Veiculo veiculo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_truck);
+        setContentView(R.layout.activity_cadastrar_veiculo);
 
         campoModelo = findViewById(R.id.editModelo);
         campoAno = findViewById(R.id.editAno);
@@ -35,21 +35,21 @@ public class CadastrarTruckActivity extends AppCompatActivity {
 
     public void salvarCaminhao(View view) {
 
-        if (validarCamposTruck()) {
-            caminhao = new Caminhao();
+        if (validarCamposVeiculo()) {
+            veiculo = new Veiculo();
 
-            caminhao.setModelo(campoModelo.getText().toString());
-            caminhao.setAno(campoAno.getText().toString());
-            caminhao.setPlaca(campoPlaca.getText().toString());
-            caminhao.setQuilometragem(campoQuilometragrem.getText().toString());
-            caminhao.setEixo(campoEixo.getText().toString());
-            caminhao.Salvar();
+            veiculo.setModelo(campoModelo.getText().toString());
+            veiculo.setAno(campoAno.getText().toString());
+            veiculo.setPlaca(campoPlaca.getText().toString());
+            veiculo.setQuilometragem(campoQuilometragrem.getText().toString());
+            veiculo.setEixo(campoEixo.getText().toString());
+            veiculo.Salvar();
             finish();
         }
     }
 
 
-    public Boolean validarCamposTruck() {
+    public Boolean validarCamposVeiculo() {
 
         if (!campoModelo.getText().toString().isEmpty()) {
             if (!campoAno.getText().toString().isEmpty()) {
@@ -58,31 +58,31 @@ public class CadastrarTruckActivity extends AppCompatActivity {
                         if (!campoEixo.getText().toString().isEmpty()) {
                             return true;
                         } else {
-                            Toast.makeText(CadastrarTruckActivity.this,
+                            Toast.makeText(CadastrarVeiculoActivity.this,
                                     "Eixo não preenchido!",
                                     Toast.LENGTH_SHORT).show();
                             return false;
                         }
                     } else {
-                        Toast.makeText(CadastrarTruckActivity.this,
+                        Toast.makeText(CadastrarVeiculoActivity.this,
                                 "Quilometragem não preenchido!",
                                 Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 } else {
-                    Toast.makeText(CadastrarTruckActivity.this,
+                    Toast.makeText(CadastrarVeiculoActivity.this,
                             "Placa não preenchida!",
                             Toast.LENGTH_SHORT).show();
                     return false;
                 }
             } else {
-                Toast.makeText(CadastrarTruckActivity.this,
+                Toast.makeText(CadastrarVeiculoActivity.this,
                         "Ano não preenchido!",
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
         } else {
-            Toast.makeText(CadastrarTruckActivity.this,
+            Toast.makeText(CadastrarVeiculoActivity.this,
                     "Modelo não preenchido!",
                     Toast.LENGTH_SHORT).show();
             return false;

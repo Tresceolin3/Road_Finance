@@ -6,10 +6,10 @@ import com.example.roadfinance.activity.helper.DateUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
-public class Caminhao {
+public class Veiculo {
     private String modelo, ano, placa, quilometragem, eixo;
 
-    public Caminhao() {
+    public Veiculo() {
 
     }
 

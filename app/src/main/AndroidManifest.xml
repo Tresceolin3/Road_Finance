@@ -21,7 +21,7 @@
             android:name=".activity.activity.ReceitasActivity"
             android:theme="@style/receitaTheme" />
         <activity
-            android:name=".activity.activity.CadastrarTruckActivity"
+            android:name=".activity.activity.CadastrarVeiculoActivity"
             android:theme="@style/receitaTheme" />
         <activity
             android:name=".activity.activity.PrincipalActivity"

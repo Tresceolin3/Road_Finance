@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.roadfinance.R;
-import com.example.roadfinance.activity.model.Caminhao;
 import com.example.roadfinance.activity.model.Empresa;
 
 public class CadastarEmpresaActivity extends AppCompatActivity {
