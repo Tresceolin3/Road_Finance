@@ -78,6 +78,17 @@
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
 
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/vincularUsuarioVeiculo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="vincularUsuarioVeiculo"
+            android:src="@drawable/ic_add_branco_24dp"
+            app:fab_colorNormal="@color/colorPrimaryReceita"
+            app:fab_label="Vincular Usuario Veiculo"
+            app:fab_size="mini"
+            tools:ignore="VectorDrawableCompat" />
+
     </com.github.clans.fab.FloatingActionMenu>
 
 

@@ -297,4 +297,8 @@ public class PrincipalActivity extends AppCompatActivity {
     public void adicionarEmpresa(View view) {
         startActivity(new Intent(this, CadastarEmpresaActivity.class));
     }
+
+    public void vincularUsuarioVeiculo(View view) {
+        startActivity(new Intent(this, VincularUsuarioVeiculoActivity.class));
+    }
 }
