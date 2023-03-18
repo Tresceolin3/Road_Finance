@@ -109,19 +109,21 @@ public class cadastrarTreeActivity extends AppCompatActivity {
         autenticacao = ConfiguraçaoFirebase.getFirebaseAutenticacao();
         //autenticacao.signOut();
         if (autenticacao.getCurrentUser() != null) {
-            if(MyApplication.getInstance().getCategoria().equals("Proprietario")){
-                startActivity(new Intent(this,PrincipalActivity.class));
-            }else if(MyApplication.getInstance().getCategoria().equals("Mecanico")){
-                startActivity(new Intent(this,MecanicoActivity.class));
+            if (MyApplication.getInstance().getCategoria().equals("Proprietario")) {
+                startActivity(new Intent(this, PrincipalActivity.class));
+            } else if (MyApplication.getInstance().getCategoria().equals("Mecanico")) {
+                startActivity(new Intent(this, MecanicoActivity.class));
             }
 
         }
     }
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         verificarUsuarioVerificado();
     }
+
+     */
 
     public void cadastrarUsuario() {
 
@@ -136,8 +138,9 @@ public class cadastrarTreeActivity extends AppCompatActivity {
                     String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
                     usuario.setIdUsuario(idUsuario);
                     usuario.salvar();
+                    verificarUsuarioVerificado();
                     finish();
-                   onStart();
+                    //onStart();
 
                 } else {
                     String exececao = "";
@@ -162,7 +165,6 @@ public class cadastrarTreeActivity extends AppCompatActivity {
         });
 
     }
-
 
 
 }

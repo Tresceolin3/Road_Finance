@@ -13,7 +13,7 @@ import com.example.roadfinance.activity.helper.MyApplication;
 
 public class CategoriaUsuarioActivity extends AppCompatActivity {
 
-    private RadioButton radioButtonMotorista, radioButtonMecanico,radioButtonProprietario;
+    private RadioButton radioButtonMotorista, radioButtonMecanico, radioButtonProprietario;
     private String categoria;
 
 
@@ -30,25 +30,25 @@ public class CategoriaUsuarioActivity extends AppCompatActivity {
     }
 
 
-    public void Continuar(View view){
+    public void Continuar(View view) {
         Intent intent = new Intent(this, cadastrarActivity.class);
 
-        if(radioButtonMotorista.isChecked()){
+        if (radioButtonMotorista.isChecked()) {
             categoria = "Motorista";
             MyApplication.getInstance().setCategoria(categoria);
             startActivity(intent);
             finish();
-        }else if(radioButtonProprietario.isChecked()){
+        } else if (radioButtonProprietario.isChecked()) {
             categoria = "Proprietario";
             MyApplication.getInstance().setCategoria(categoria);
             startActivity(intent);
             finish();
-        }else if(radioButtonMecanico.isChecked()){
+        } else if (radioButtonMecanico.isChecked()) {
             categoria = "Mecanico";
             MyApplication.getInstance().setCategoria(categoria);
             startActivity(intent);
             finish();
-        }else{
+        } else {
             Toast.makeText(CategoriaUsuarioActivity.this,
                     "Selecione algumas das opções",
                     Toast.LENGTH_SHORT).show();

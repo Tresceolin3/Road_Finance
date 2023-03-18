@@ -20,12 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 public class loginActivity extends AppCompatActivity {
     private EditText campoEmail, campoSenha;
@@ -71,24 +66,11 @@ public class loginActivity extends AppCompatActivity {
 
     }
 
-    public void recuperarCategoriaLogin(){
+    public String recuperarCategoria() {
         String emailUsuario = autenticacao.getCurrentUser().getEmail();
         String idUsuario = Base64Custom.codificarBase64(emailUsuario);
         DatabaseReference usuarioRef = firebaseRef.child("usuarios").child(idUsuario);
-
-        usuarioRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                String categoria = usuario.getCategoria();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        return usuarioRef.child("categoria").toString();
     }
 
 
@@ -100,15 +82,15 @@ public class loginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    abrirTelaPrincipal();
+                    abrirTelaTipo();
                 } else {
                     String exececao = "";
                     try {
                         throw task.getException();
-                    } catch (FirebaseAuthInvalidUserException e){
+                    } catch (FirebaseAuthInvalidUserException e) {
                         exececao = "Usuário não cadastrado";
-                    }catch(FirebaseAuthInvalidCredentialsException e){
-                        exececao ="E-mail e senha não correspondem" +
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        exececao = "E-mail e senha não correspondem" +
                                 " a um usuário cadastrado";
                     } catch (Exception e) {
                         exececao = "Erro ao logar usuário: " + e.getMessage();
@@ -123,8 +105,16 @@ public class loginActivity extends AppCompatActivity {
         });
     }
 
-    public void abrirTelaPrincipal(){
-        startActivity(new Intent(this,PrincipalActivity.class));
+    public void abrirTelaTipo() {
+        if (recuperarCategoria().equals("Proprietario")) {
+            startActivity(new Intent(this, PrincipalActivity.class));
+        } else if (recuperarCategoria().equals("Mecanico")) {
+            startActivity(new Intent(this, MecanicoActivity.class));
+        } else if (recuperarCategoria().equals("Motorista")) {
+
+        } else {
+            System.out.println("Erro ao abrir!");
+        }
         finish();
     }
 

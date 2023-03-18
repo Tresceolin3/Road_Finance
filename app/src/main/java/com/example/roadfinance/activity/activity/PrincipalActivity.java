@@ -90,7 +90,7 @@ public class PrincipalActivity extends AppCompatActivity {
         swipe();
     }
 
-    public void swipe(){
+    public void swipe() {
 
         ItemTouchHelper.Callback itemTouch = new ItemTouchHelper.Callback() {
             @Override
@@ -108,11 +108,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                excluirMovimentação( viewHolder );
+                excluirMovimentação(viewHolder);
             }
         };
 
-        new ItemTouchHelper( itemTouch ).attachToRecyclerView( recyclerView );
+        new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
 
     }
 
