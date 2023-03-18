@@ -40,7 +40,7 @@ public class VincularUsuarioVeiculo {
         String placa = getPlaca();
 
         DatabaseReference firebase = ConfiguraçaoFirebase.getFirebaseDatabase();
-        firebase.child("caminhao")
+        firebase.child("usuarioveiculo")
                 .child(idUsuario)
                 .child(placa)
                 .push()

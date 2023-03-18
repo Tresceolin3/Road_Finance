@@ -8,6 +8,7 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     private String nome;
     private String sobre_nome;
+    private String categoria;
     private String cpf;
     private String data_nas;
     private String celular;
@@ -111,6 +112,14 @@ public class MyApplication extends Application {
 
     public void setBairro(String bairro) {
         this.bairro = bairro;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }
 

@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.activity.VincularUsuarioVeiculoActivity"></activity>
+        <activity android:name=".activity.activity.MecanicoActivity"></activity>
+        <activity android:name=".activity.activity.CategoriaUsuarioActivity" />
+        <activity android:name=".activity.activity.VincularUsuarioVeiculoActivity" />
         <activity android:name=".activity.activity.CadastarEmpresaActivity" />
         <activity
             android:name=".activity.activity.DespesasActivity"

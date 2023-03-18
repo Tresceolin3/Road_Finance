@@ -17,6 +17,7 @@ public class Usuario {
     private Endereco endereco;
     private Double despesaTotal = 0.00;
     private Double receitaTotal = 0.00;
+    private String categoria;
 
     public Usuario() {
     }
@@ -118,5 +119,13 @@ public class Usuario {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

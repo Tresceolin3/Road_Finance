@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -65,6 +66,7 @@ public class cadastrarTreeActivity extends AppCompatActivity {
                                 usuario.setCpf(MyApplication.getInstance().getCpf());
                                 usuario.setData_nasc(MyApplication.getInstance().getDataNas());
                                 usuario.setCelular(MyApplication.getInstance().getCelular());
+                                usuario.setCategoria(MyApplication.getInstance().getCategoria());
 
                                 endereco = new Endereco();
                                 endereco.setCep(MyApplication.getInstance().getCep());
@@ -102,6 +104,25 @@ public class cadastrarTreeActivity extends AppCompatActivity {
 
     }
 
+
+    public void verificarUsuarioVerificado() {
+        autenticacao = ConfiguraçaoFirebase.getFirebaseAutenticacao();
+        //autenticacao.signOut();
+        if (autenticacao.getCurrentUser() != null) {
+            if(MyApplication.getInstance().getCategoria().equals("Proprietario")){
+                startActivity(new Intent(this,PrincipalActivity.class));
+            }else if(MyApplication.getInstance().getCategoria().equals("Mecanico")){
+                startActivity(new Intent(this,MecanicoActivity.class));
+            }
+
+        }
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        verificarUsuarioVerificado();
+    }
+
     public void cadastrarUsuario() {
 
         autenticacao = ConfiguraçaoFirebase.getFirebaseAutenticacao();
@@ -116,6 +137,8 @@ public class cadastrarTreeActivity extends AppCompatActivity {
                     usuario.setIdUsuario(idUsuario);
                     usuario.salvar();
                     finish();
+                   onStart();
+
                 } else {
                     String exececao = "";
                     try {
@@ -139,6 +162,7 @@ public class cadastrarTreeActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 }
