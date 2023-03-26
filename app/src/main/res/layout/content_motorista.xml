@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.activity.PrincipalActivity"
-    tools:showIn="@layout/activity_principal">
+    tools:context=".activity.activity.MotoristaActivity"
+    tools:showIn="@layout/activity_motorista">
 
     <LinearLayout
         android:layout_width="match_parent"

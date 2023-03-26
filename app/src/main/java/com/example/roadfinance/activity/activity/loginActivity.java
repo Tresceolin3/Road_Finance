@@ -107,9 +107,9 @@ public class loginActivity extends AppCompatActivity {
 
     public void abrirTelaTipo() {
         if (recuperarCategoria().equals("Proprietario")) {
-            startActivity(new Intent(this, PrincipalActivity.class));
+            startActivity(new Intent(this, ProprietarioActivity.class));
         } else if (recuperarCategoria().equals("Mecanico")) {
-            startActivity(new Intent(this, MecanicoActivity.class));
+            startActivity(new Intent(this, MotoristaActivity.class));
         } else if (recuperarCategoria().equals("Motorista")) {
 
         } else {

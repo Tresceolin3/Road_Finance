@@ -110,20 +110,13 @@ public class cadastrarTreeActivity extends AppCompatActivity {
         //autenticacao.signOut();
         if (autenticacao.getCurrentUser() != null) {
             if (MyApplication.getInstance().getCategoria().equals("Proprietario")) {
-                startActivity(new Intent(this, PrincipalActivity.class));
+                startActivity(new Intent(this, ProprietarioActivity.class));
             } else if (MyApplication.getInstance().getCategoria().equals("Mecanico")) {
-                startActivity(new Intent(this, MecanicoActivity.class));
+                startActivity(new Intent(this, MotoristaActivity.class));
             }
 
         }
     }
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-        verificarUsuarioVerificado();
-    }
-
-     */
 
     public void cadastrarUsuario() {
 

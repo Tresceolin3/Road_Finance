@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.activity.MecanicoActivity"></activity>
+        <activity android:name=".activity.activity.CadastrarViagemActivity"></activity>
+        <activity android:name=".activity.activity.MotoristaActivity" />
         <activity android:name=".activity.activity.CategoriaUsuarioActivity" />
         <activity android:name=".activity.activity.VincularUsuarioVeiculoActivity" />
         <activity android:name=".activity.activity.CadastarEmpresaActivity" />
@@ -27,7 +28,7 @@
             android:name=".activity.activity.CadastrarVeiculoActivity"
             android:theme="@style/receitaTheme" />
         <activity
-            android:name=".activity.activity.PrincipalActivity"
+            android:name=".activity.activity.ProprietarioActivity"
             android:label="@string/title_activity_principal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.activity.cadastrarTreeActivity" />

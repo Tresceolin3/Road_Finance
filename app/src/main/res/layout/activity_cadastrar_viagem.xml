@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.activity.CadastrarViagemActivity">
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dados da Viagem"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editOrigem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <EditText
+        android:id="@+id/editDestino"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Destino"
+        android:inputType="textLongMessage"
+        app:layout_constraintBottom_toTopOf="@+id/editDataViagem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editOrigem" />
+
+    <EditText
+        android:id="@+id/editQuilometragem"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Quilometragem Atual"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfirma"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPlaca" />
+
+    <EditText
+        android:id="@+id/editDataViagem"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Data Viagem"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/editValorFrete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDestino" />
+
+    <EditText
+        android:id="@+id/editOrigem"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Origem"
+        android:inputType="textLongMessage"
+        app:layout_constraintBottom_toTopOf="@+id/editDestino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <EditText
+        android:id="@+id/editPlaca"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Placa"
+        android:inputType="textShortMessage"
+        app:layout_constraintBottom_toTopOf="@+id/editQuilometragem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editValorFrete" />
+
+    <EditText
+        android:id="@+id/editValorFrete"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Valor Frete"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/editPlaca"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDataViagem" />
+
+    <Button
+        android:id="@+id/buttonConfirma"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="SalvarViagem"
+        android:text="Confirmar"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editQuilometragem" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.activity.PrincipalActivity">
+    tools:context=".activity.activity.MotoristaActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_principal" />
+    <include layout="@layout/content_motorista" />
 
     <com.github.clans.fab.FloatingActionMenu
         android:layout_width="wrap_content"
@@ -34,60 +34,59 @@
         fab:menu_icon="@drawable/ic_add_branco_24dp">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_despesa"
+            android:id="@+id/menu_abastecimento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="adicionarDespesa"
             android:src="@drawable/ic_add_branco_24dp"
             app:fab_colorNormal="@color/colorPrimaryDespesa"
-            app:fab_label="Despesa"
+            app:fab_label="Abastecimento"
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_receita"
+            android:id="@+id/menu_manuntencao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_branco_24dp"
+            app:fab_colorNormal="@color/colorPrimaryReceita"
+            app:fab_label="Manutenção"
+            app:fab_size="mini"
+            tools:ignore="VectorDrawableCompat" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_receitas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="adicionarReceita"
             android:src="@drawable/ic_add_branco_24dp"
             app:fab_colorNormal="@color/colorPrimaryReceita"
-            app:fab_label="Receita"
-            app:fab_size="mini"
-            tools:ignore="VectorDrawableCompat" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/truck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="adicionarTruck"
-            android:src="@drawable/ic_add_branco_24dp"
-            app:fab_colorNormal="@color/colorPrimaryReceita"
-            app:fab_label="Caminhão"
+            app:fab_label="Receitas"
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
 
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/empresa"
+            android:id="@+id/menu_viagem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="adicionarEmpresa"
+            android:onClick="adicionarViagem"
             android:src="@drawable/ic_add_branco_24dp"
             app:fab_colorNormal="@color/colorPrimaryReceita"
-            app:fab_label="Empresa"
+            app:fab_label="Viagem"
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/vincularUsuarioVeiculo"
+            android:id="@+id/menu_despesas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="vincularUsuarioVeiculo"
+            android:onClick="adicionarDespesa"
             android:src="@drawable/ic_add_branco_24dp"
             app:fab_colorNormal="@color/colorPrimaryReceita"
-            app:fab_label="Vincular Usuario Veiculo"
+            app:fab_label="Despesas"
             app:fab_size="mini"
             tools:ignore="VectorDrawableCompat" />
+
 
     </com.github.clans.fab.FloatingActionMenu>
 

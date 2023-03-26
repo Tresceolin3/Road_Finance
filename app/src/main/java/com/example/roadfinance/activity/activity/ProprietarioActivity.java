@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PrincipalActivity extends AppCompatActivity {
+public class ProprietarioActivity extends AppCompatActivity {
     private MaterialCalendarView calendarView;
     private TextView textoSaudacao, textoSaldo;
     private Double despesaTotal = 0.0;
@@ -66,7 +66,7 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_principal);
+        setContentView(R.layout.activity_proprietario);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Road Finance");
@@ -143,7 +143,7 @@ public class PrincipalActivity extends AppCompatActivity {
         alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(PrincipalActivity.this,
+                Toast.makeText(ProprietarioActivity.this,
                         "Cancelado",
                         Toast.LENGTH_SHORT).show();
                 adapterMovimentacao.notifyDataSetChanged();
@@ -290,7 +290,7 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(new Intent(this, DespesasActivity.class));
     }
 
-    public void adicionarTruck(View view) {
+    public void adicionarVeiculo(View view) {
         startActivity(new Intent(this, CadastrarVeiculoActivity.class));
     }
 

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.activity.ProprietarioActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_proprietario" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        app:menu_colorNormal="@color/colorAccent"
+        app:menu_colorPressed="@color/colorAccent"
+        fab:menu_icon="@drawable/ic_add_branco_24dp">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_despesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="adicionarDespesa"
+            android:src="@drawable/ic_add_branco_24dp"
+            app:fab_colorNormal="@color/colorPrimaryDespesa"
+            app:fab_label="Despesa"
+            app:fab_size="mini"
+            tools:ignore="VectorDrawableCompat" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_receita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="adicionarReceita"
+            android:src="@drawable/ic_add_branco_24dp"
+            app:fab_colorNormal="@color/colorPrimaryReceita"
+            app:fab_label="Receita"
+            app:fab_size="mini"
+            tools:ignore="VectorDrawableCompat" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_veiculo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="adicionarVeiculo"
+            android:src="@drawable/ic_add_branco_24dp"
+            app:fab_colorNormal="@color/colorPrimaryReceita"
+            app:fab_label="Caminhão"
+            app:fab_size="mini"
+            tools:ignore="VectorDrawableCompat" />
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_empresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="adicionarEmpresa"
+            android:src="@drawable/ic_add_branco_24dp"
+            app:fab_colorNormal="@color/colorPrimaryReceita"
+            app:fab_label="Empresa"
+            app:fab_size="mini"
+            tools:ignore="VectorDrawableCompat" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/vincularUsuarioVeiculo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="vincularUsuarioVeiculo"
+            android:src="@drawable/ic_add_branco_24dp"
+            app:fab_colorNormal="@color/colorPrimaryReceita"
+            app:fab_label="Vincular Usuario Veiculo"
+            app:fab_size="mini"
+            tools:ignore="VectorDrawableCompat" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
