@@ -59,7 +59,7 @@ public class CadastrarViagemActivity extends AppCompatActivity {
             viagem.setPlaca(campoPlaca.getText().toString());
             viagem.setQuilometragem(campoQuilometragem.getText().toString());
 
-            Double receitaAtualiazada = valores_viagem + valorRecuperado;
+            Double receitaAtualiazada = valorRecuperado;//valores_viagem +
             atualizarValorLiquido(receitaAtualiazada);
 
             viagem.SalvarViagem(data);
