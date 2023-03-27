@@ -6,7 +6,7 @@ import com.example.roadfinance.activity.helper.DateUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
-public class MovimentacaoViagem {
+public class Viagem {
 
     private String origem;
     private String destino;
@@ -15,25 +15,33 @@ public class MovimentacaoViagem {
     private String quilometragem;
     private Double valor_frete;
     private String key;
+    private Double valor_liquido;
 
-    public MovimentacaoViagem(){
+    public Viagem() {
 
     }
 
-    public void SalvarViagem(String dataSelecionada){
+    public void SalvarViagem(String dataSelecionada) {
         FirebaseAuth autenticacao = ConfiguraçaoFirebase.getFirebaseAutenticacao();
         String idUsuario = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail());
 
         String mesAno = DateUtil.mesAnoDataEscolhida(dataSelecionada);
 
         DatabaseReference firebase = ConfiguraçaoFirebase.getFirebaseDatabase();
-        firebase.child("movimentacaoviagem")
+        firebase.child("viagem")
                 .child(idUsuario)
                 .child(mesAno)
                 .push()
                 .setValue(this);
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getOrigem() {
         return origem;
@@ -83,11 +91,12 @@ public class MovimentacaoViagem {
         this.valor_frete = valor_frete;
     }
 
-    public String getKey() {
-        return key;
+
+    public Double getValor_liquido() {
+        return valor_liquido;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setValor_liquido(Double valor_liquido) {
+        this.valor_liquido = valor_liquido;
     }
 }

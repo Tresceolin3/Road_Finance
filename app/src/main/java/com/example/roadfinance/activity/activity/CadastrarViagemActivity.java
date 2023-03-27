@@ -8,14 +8,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.roadfinance.R;
+import com.example.roadfinance.activity.config.ConfiguraçaoFirebase;
+import com.example.roadfinance.activity.helper.Base64Custom;
 import com.example.roadfinance.activity.helper.DateUtil;
-import com.example.roadfinance.activity.model.MovimentacaoViagem;
+import com.example.roadfinance.activity.model.Viagem;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class CadastrarViagemActivity extends AppCompatActivity {
     private EditText campoOrigem, campoDestino, campoData, campoValorFrete,
             campoPlaca, campoQuilometragem;
-    private MovimentacaoViagem movimentacaoViagem;
-
+    private Viagem viagem;
+    private DatabaseReference firebaseRef = ConfiguraçaoFirebase.getFirebaseDatabase();
+    private FirebaseAuth autenticacao = ConfiguraçaoFirebase.getFirebaseAutenticacao();
+    private Double valores_viagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +41,33 @@ public class CadastrarViagemActivity extends AppCompatActivity {
 
         campoData.setText(DateUtil.dataAtual());
 
+        recuperarValorLiquidoTotal();
+
 
     }
 
     public void SalvarViagem(View view) {
         if (validarCamposViagem()) {
-            movimentacaoViagem = new MovimentacaoViagem();
+            viagem = new Viagem();
             String data = campoData.getText().toString();
-            Double valor = Double.parseDouble(campoValorFrete.getText().toString());
+            Double valorRecuperado = Double.parseDouble(campoValorFrete.getText().toString());
 
-            movimentacaoViagem.setValorFrete(valor);
-            movimentacaoViagem.setOrigem(campoOrigem.getText().toString());
-            movimentacaoViagem.setDestino(campoDestino.getText().toString());
-            movimentacaoViagem.setDataViagem(campoData.getText().toString());
-            movimentacaoViagem.setPlaca(campoPlaca.getText().toString());
-            movimentacaoViagem.setQuilometragem(campoQuilometragem.getText().toString());
+            viagem.setValorFrete(valorRecuperado);
+            viagem.setOrigem(campoOrigem.getText().toString());
+            viagem.setDestino(campoDestino.getText().toString());
+            viagem.setDataViagem(campoData.getText().toString());
+            viagem.setPlaca(campoPlaca.getText().toString());
+            viagem.setQuilometragem(campoQuilometragem.getText().toString());
 
-            movimentacaoViagem.SalvarViagem(data);
+            Double receitaAtualiazada = valores_viagem + valorRecuperado;
+            atualizarValorLiquido(receitaAtualiazada);
+
+            viagem.SalvarViagem(data);
             finish();
         }
 
     }
+
 
 
     public Boolean validarCamposViagem() {
@@ -107,6 +123,36 @@ public class CadastrarViagemActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    public void recuperarValorLiquidoTotal() {
+        String emailUsuario = autenticacao.getCurrentUser().getEmail();
+        String idUsuario = Base64Custom.codificarBase64(emailUsuario);
+        DatabaseReference usuarioRef = firebaseRef.child("viagem").child(idUsuario);
+
+        usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Viagem viagem = dataSnapshot.getValue(Viagem.class);
+                //valores_viagem = viagem.getValor_liquido();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    public void atualizarValorLiquido(Double valorLiquido) {
+        String emailUsuario = autenticacao.getCurrentUser().getEmail();
+        String idUsuario = Base64Custom.codificarBase64(emailUsuario);
+        DatabaseReference usuarioRef = firebaseRef.child("viagem").child(idUsuario);
+
+        usuarioRef.child("valor_liquido").setValue(valorLiquido);
+
+    }
+
 
 
 }

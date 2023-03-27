@@ -3,7 +3,6 @@ package com.example.roadfinance.activity.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +22,7 @@ import com.example.roadfinance.activity.adapter.AdapterMovimentacaoViagem;
 import com.example.roadfinance.activity.config.ConfiguraçaoFirebase;
 import com.example.roadfinance.activity.helper.Base64Custom;
 import com.example.roadfinance.activity.model.Movimentacao;
-import com.example.roadfinance.activity.model.MovimentacaoViagem;
+import com.example.roadfinance.activity.model.Viagem;
 import com.example.roadfinance.activity.model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -45,16 +44,17 @@ public class MotoristaActivity extends AppCompatActivity {
     private Double despesaTotal = 0.0;
     private Double receitaTotal = 0.0;
     private Double resumoUsuario = 0.0;
+    private Double valorFreteTotal = 0.0;
 
     private FirebaseAuth autenticacao = ConfiguraçaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguraçaoFirebase.getFirebaseDatabase();
     private DatabaseReference usuarioRef;
     private ValueEventListener valueEventListenerUsuario;
-    private ValueEventListener valueEventListenerMovimentacoes;
+    private ValueEventListener valueEventListenerMovimentacoesViagem;
 
     private AdapterMovimentacaoViagem adapterMovimentacaoViagem;
-    private List<MovimentacaoViagem> movimentacaoViagems = new ArrayList<>();
-    private MovimentacaoViagem movimentacao_viagem;
+    private List<Viagem> viagems = new ArrayList<>();
+    private Viagem movimentacao_viagem;
     private DatabaseReference movimentacaoRef;
     private Movimentacao movimentacao;
 
@@ -72,11 +72,10 @@ public class MotoristaActivity extends AppCompatActivity {
 
         calendarView = findViewById(R.id.calendarView);
         configuraCalenderView();
-
         recyclerView = findViewById(R.id.recyclerMovimento);
 
         //configurar adapter
-        adapterMovimentacaoViagem = new AdapterMovimentacaoViagem(movimentacaoViagems, this);
+        adapterMovimentacaoViagem = new AdapterMovimentacaoViagem(viagems, this);
         //configurar Recycleview
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -122,11 +121,11 @@ public class MotoristaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int position = viewHolder.getAdapterPosition();
-                movimentacao_viagem = movimentacaoViagems.get(position);
+                movimentacao_viagem = viagems.get(position);
 
                 String emailUsuario = autenticacao.getCurrentUser().getEmail();
                 String idUsuario = Base64Custom.codificarBase64(emailUsuario);
-                movimentacaoRef = firebaseRef.child("movimentacaoviagem")
+                movimentacaoRef = firebaseRef.child("viagem")
                         .child(idUsuario)
                         .child(mesAnoSelecionado);
 
@@ -155,12 +154,12 @@ public class MotoristaActivity extends AppCompatActivity {
         usuarioRef = firebaseRef.child("usuarios").child(idUsuario);
 
         if (movimentacao.getTipo().equals("r")) {
-            receitaTotal = receitaTotal - movimentacao.getValor();
+            receitaTotal = receitaTotal + valorFreteTotal - movimentacao.getValor();
             usuarioRef.child("receitaTotal").setValue(receitaTotal);
         }
 
         if (movimentacao.getTipo().equals("d")) {
-            despesaTotal = despesaTotal - movimentacao.getValor();
+            despesaTotal = despesaTotal + valorFreteTotal - movimentacao.getValor();
             usuarioRef.child("despesaTotal").setValue(despesaTotal);
         }
     }
@@ -168,19 +167,19 @@ public class MotoristaActivity extends AppCompatActivity {
     public void recuperarMovimentacoes() {
         String emailUsuario = autenticacao.getCurrentUser().getEmail();
         String idUsuario = Base64Custom.codificarBase64(emailUsuario);
-        movimentacaoRef = firebaseRef.child("movimentacao_viagem")
+        movimentacaoRef = firebaseRef.child("viagem")
                 .child(idUsuario)
                 .child(mesAnoSelecionado);
 
-        valueEventListenerMovimentacoes = movimentacaoRef.addValueEventListener(new ValueEventListener() {
+        valueEventListenerMovimentacoesViagem = movimentacaoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                movimentacaoViagems.clear();
+                viagems.clear();
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
-                    MovimentacaoViagem movimentacaoViagem = dados.getValue(MovimentacaoViagem.class);
-                    movimentacaoViagem.setKey(dados.getKey());
-                    movimentacaoViagems.add(movimentacaoViagem);
+                    Viagem viagem = dados.getValue(Viagem.class);
+                    viagem.setKey(dados.getKey());
+                    viagems.add(viagem);
                 }
                 adapterMovimentacaoViagem.notifyDataSetChanged();
             }
@@ -190,6 +189,27 @@ public class MotoristaActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    public void recuperarValorFrete() {
+        String emailUsuario = autenticacao.getCurrentUser().getEmail();
+        String idUsuario = Base64Custom.codificarBase64(emailUsuario);
+        usuarioRef = firebaseRef.child("viagem").child(idUsuario);//.child(mesAnoSelecionado)
+
+        valueEventListenerMovimentacoesViagem = usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Viagem viagem = dataSnapshot.getValue(Viagem.class);
+                 //valorFreteTotal= viagem.getValorFrete();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public void recuperarResumo() {
@@ -205,7 +225,8 @@ public class MotoristaActivity extends AppCompatActivity {
 
                 despesaTotal = usuario.getDespesaTotal();
                 receitaTotal = usuario.getReceitaTotal();
-                resumoUsuario = receitaTotal - despesaTotal;
+                recuperarValorFrete();
+                resumoUsuario = receitaTotal - despesaTotal - valorFreteTotal;
 
                 DecimalFormat decimalFormat = new DecimalFormat("0.##");
                 String resultadoFormat = decimalFormat.format(resumoUsuario);
@@ -254,8 +275,8 @@ public class MotoristaActivity extends AppCompatActivity {
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
                 String mesSelecionao = String.format("%02d", (date.getMonth() + 1));
                 mesAnoSelecionado = String.valueOf(mesSelecionao + "" + date.getYear());
-                movimentacaoRef.removeEventListener(valueEventListenerMovimentacoes);
-                //recuperarMovimentacoes();
+                movimentacaoRef.removeEventListener(valueEventListenerMovimentacoesViagem);
+                recuperarMovimentacoes();
 
             }
         });
@@ -273,7 +294,7 @@ public class MotoristaActivity extends AppCompatActivity {
         super.onStop();
         Log.i("Evento", "evento foi removido!");
         usuarioRef.removeEventListener(valueEventListenerUsuario);
-        movimentacaoRef.removeEventListener(valueEventListenerMovimentacoes);
+        movimentacaoRef.removeEventListener(valueEventListenerMovimentacoesViagem);
     }
 
     public void adicionarReceita(View view) {

@@ -4,23 +4,23 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.roadfinance.R;
-import com.example.roadfinance.activity.model.MovimentacaoViagem;
+import com.example.roadfinance.activity.model.Viagem;
 
 import java.util.List;
 
 public class AdapterMovimentacaoViagem  extends RecyclerView.Adapter<AdapterMovimentacaoViagem.MyViewHolder>{
 
-    List<MovimentacaoViagem> movimentacoesViagem;
+    List<Viagem> movimentacoesViagem;
     Context context;
 
 
 
-    public AdapterMovimentacaoViagem(List<MovimentacaoViagem> movimentacoesViagem, Context context) {
+    public AdapterMovimentacaoViagem(List<Viagem> movimentacoesViagem, Context context) {
         this.movimentacoesViagem = movimentacoesViagem;
         this.context = context;
     }
@@ -35,7 +35,7 @@ public class AdapterMovimentacaoViagem  extends RecyclerView.Adapter<AdapterMovi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        MovimentacaoViagem movimentacao_viagem = movimentacoesViagem.get(position);
+        Viagem movimentacao_viagem = movimentacoesViagem.get(position);
 
         holder.origem.setText(movimentacao_viagem.getOrigem());
         holder.valor.setText(String.valueOf(movimentacao_viagem.getValorFrete()));
@@ -51,7 +51,7 @@ public class AdapterMovimentacaoViagem  extends RecyclerView.Adapter<AdapterMovi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        EditText origem, valor, destino;
+        TextView origem, valor, destino;
 
         public MyViewHolder(View itemView) {
             super(itemView);
