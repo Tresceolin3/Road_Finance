@@ -18,11 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roadfinance.R;
-import com.example.roadfinance.activity.adapter.AdapterMovimentacaoViagem;
+import com.example.roadfinance.activity.adapter.AdapterMovimentacaoMecanico;
 import com.example.roadfinance.activity.config.ConfiguraçaoFirebase;
 import com.example.roadfinance.activity.helper.Base64Custom;
-import com.example.roadfinance.activity.model.Movimentacao;
-import com.example.roadfinance.activity.model.Viagem;
+import com.example.roadfinance.activity.model.MovimentacaoMecanico;
 import com.example.roadfinance.activity.model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -37,26 +36,24 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MotoristaActivity extends AppCompatActivity {
+public class MecanicoActivity extends AppCompatActivity {
 
     private MaterialCalendarView calendarView;
     private TextView textoSaudacao, textoSaldo;
-    private Double despesaTotal = 0.0;
-    private Double receitaTotal = 0.0;
-    private Double resumoUsuario = 0.0;
-    private Double valorFreteTotal = 0.0;
+    private Double manuntencaoTotal = 0.0;
+    private Double revisaoTotal = 0.0;
+    private Double resumoMecanico = 0.0;
 
     private FirebaseAuth autenticacao = ConfiguraçaoFirebase.getFirebaseAutenticacao();
     private DatabaseReference firebaseRef = ConfiguraçaoFirebase.getFirebaseDatabase();
     private DatabaseReference usuarioRef;
     private ValueEventListener valueEventListenerUsuario;
-    private ValueEventListener valueEventListenerMovimentacoesViagem;
+    private ValueEventListener valueEventListenerMovimentacoes;
 
-    private AdapterMovimentacaoViagem adapterMovimentacaoViagem;
-    private List<Viagem> viagems = new ArrayList<>();
-    private Viagem movimentacao_viagem;
+    private AdapterMovimentacaoMecanico adapterMovimentacaoMecanico;
+    private List<MovimentacaoMecanico> movimentacoes = new ArrayList<>();
+    private MovimentacaoMecanico movimentacao_mecanico;
     private DatabaseReference movimentacaoRef;
-    private Movimentacao movimentacao;
 
     private String mesAnoSelecionado;
 
@@ -65,24 +62,27 @@ public class MotoristaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_motorista);
+        setContentView(R.layout.activity_mecanico);
+
 
         textoSaudacao = findViewById(R.id.textSaudacao);
         textoSaldo = findViewById(R.id.textSaldo);
 
         calendarView = findViewById(R.id.calendarView);
         configuraCalenderView();
-        recyclerView = findViewById(R.id.recyclerMovimentoMotorista);
+
+        recyclerView = findViewById(R.id.recyclerMovimentoMecanico);
 
         //configurar adapter
-        adapterMovimentacaoViagem = new AdapterMovimentacaoViagem(viagems, this);
+        adapterMovimentacaoMecanico = new AdapterMovimentacaoMecanico(movimentacoes, this);
         //configurar Recycleview
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapterMovimentacaoViagem);
+        recyclerView.setAdapter(adapterMovimentacaoMecanico);
         swipe();
     }
+
 
     public void swipe() {
 
@@ -102,7 +102,7 @@ public class MotoristaActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                excluirMovimentaçãoViagem(viewHolder);
+                excluirMovimentação(viewHolder);
             }
         };
 
@@ -110,10 +110,11 @@ public class MotoristaActivity extends AppCompatActivity {
 
     }
 
-    public void excluirMovimentaçãoViagem(final RecyclerView.ViewHolder viewHolder) {
+
+    public void excluirMovimentação(final RecyclerView.ViewHolder viewHolder) {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("Excluir Viagem da Conta");
+        alertDialog.setTitle("Excluir Movimentação da Conta");
         alertDialog.setMessage("Você tem certeza que deseja realmente excluir ?");
         alertDialog.setCancelable(false);
 
@@ -121,67 +122,68 @@ public class MotoristaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int position = viewHolder.getAdapterPosition();
-                movimentacao_viagem = viagems.get(position);
+                movimentacao_mecanico = movimentacoes.get(position);
 
                 String emailUsuario = autenticacao.getCurrentUser().getEmail();
                 String idUsuario = Base64Custom.codificarBase64(emailUsuario);
-                movimentacaoRef = firebaseRef.child("viagem")
+                movimentacaoRef = firebaseRef.child("movimentacao_mecanico")
                         .child(idUsuario)
                         .child(mesAnoSelecionado);
 
-                movimentacaoRef.child(movimentacao_viagem.getKey()).removeValue();
-                adapterMovimentacaoViagem.notifyItemRemoved(position);
+                movimentacaoRef.child(movimentacao_mecanico.getKey()).removeValue();
+                adapterMovimentacaoMecanico.notifyItemRemoved(position);
                 atualizarSaldo();
             }
         });
         alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MotoristaActivity.this,
+                Toast.makeText(MecanicoActivity.this,
                         "Cancelado",
                         Toast.LENGTH_SHORT).show();
-                adapterMovimentacaoViagem.notifyDataSetChanged();
+                adapterMovimentacaoMecanico.notifyDataSetChanged();
             }
         });
         AlertDialog alert = alertDialog.create();
         alert.show();
     }
 
-    public void atualizarSaldo() {
 
+    public void atualizarSaldo() {
         String emailUsuario = autenticacao.getCurrentUser().getEmail();
         String idUsuario = Base64Custom.codificarBase64(emailUsuario);
         usuarioRef = firebaseRef.child("usuarios").child(idUsuario);
 
-        if (movimentacao.getTipo().equals("r")) {
-            receitaTotal = receitaTotal + valorFreteTotal - movimentacao.getValor();
-            usuarioRef.child("receitaTotal").setValue(receitaTotal);
+        if (movimentacao_mecanico.getTipo().equals("r")) {
+            revisaoTotal = revisaoTotal - movimentacao_mecanico.getValor();
+            usuarioRef.child("receitaTotal").setValue(revisaoTotal);
         }
 
-        if (movimentacao.getTipo().equals("d")) {
-            despesaTotal = despesaTotal + valorFreteTotal - movimentacao.getValor();
-            usuarioRef.child("despesaTotal").setValue(despesaTotal);
+        if (movimentacao_mecanico.getTipo().equals("m")) {
+            manuntencaoTotal = manuntencaoTotal - movimentacao_mecanico.getValor();
+            usuarioRef.child("despesaTotal").setValue(manuntencaoTotal);
         }
     }
+
 
     public void recuperarMovimentacoes() {
         String emailUsuario = autenticacao.getCurrentUser().getEmail();
         String idUsuario = Base64Custom.codificarBase64(emailUsuario);
-        movimentacaoRef = firebaseRef.child("viagem")
+        movimentacaoRef = firebaseRef.child("movimentacao_mecanico")
                 .child(idUsuario)
                 .child(mesAnoSelecionado);
 
-        valueEventListenerMovimentacoesViagem = movimentacaoRef.addValueEventListener(new ValueEventListener() {
+        valueEventListenerMovimentacoes = movimentacaoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                viagems.clear();
+                movimentacoes.clear();
                 for (DataSnapshot dados : dataSnapshot.getChildren()) {
-                    Viagem viagem = dados.getValue(Viagem.class);
-                    viagem.setKey(dados.getKey());
-                    viagems.add(viagem);
+                    MovimentacaoMecanico movimentacao = dados.getValue(MovimentacaoMecanico.class);
+                    movimentacao.setKey(dados.getKey());
+                    movimentacoes.add(movimentacao);
                 }
-                adapterMovimentacaoViagem.notifyDataSetChanged();
+                adapterMovimentacaoMecanico.notifyDataSetChanged();
             }
 
             @Override
@@ -191,26 +193,6 @@ public class MotoristaActivity extends AppCompatActivity {
         });
     }
 
-
-    public void recuperarValorFrete() {
-        String emailUsuario = autenticacao.getCurrentUser().getEmail();
-        String idUsuario = Base64Custom.codificarBase64(emailUsuario);
-        usuarioRef = firebaseRef.child("viagem").child(idUsuario);//.child(mesAnoSelecionado)
-
-        valueEventListenerMovimentacoesViagem = usuarioRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Viagem viagem = dataSnapshot.getValue(Viagem.class);
-                 //valorFreteTotal= viagem.getValorFrete();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
     public void recuperarResumo() {
         String emailUsuario = autenticacao.getCurrentUser().getEmail();
@@ -223,13 +205,12 @@ public class MotoristaActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
 
-                despesaTotal = usuario.getDespesaTotal();
-                receitaTotal = usuario.getReceitaTotal();
-                recuperarValorFrete();
-                resumoUsuario = receitaTotal - despesaTotal - valorFreteTotal;
+                manuntencaoTotal = usuario.getDespesaTotal();
+                revisaoTotal = usuario.getReceitaTotal();
+                resumoMecanico = manuntencaoTotal + revisaoTotal;
 
                 DecimalFormat decimalFormat = new DecimalFormat("0.##");
-                String resultadoFormat = decimalFormat.format(resumoUsuario);
+                String resultadoFormat = decimalFormat.format(resumoMecanico);
 
                 textoSaudacao.setText("Olá, " + usuario.getNome());
                 textoSaldo.setText("R$ " + resultadoFormat);
@@ -275,7 +256,7 @@ public class MotoristaActivity extends AppCompatActivity {
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
                 String mesSelecionao = String.format("%02d", (date.getMonth() + 1));
                 mesAnoSelecionado = String.valueOf(mesSelecionao + "" + date.getYear());
-                movimentacaoRef.removeEventListener(valueEventListenerMovimentacoesViagem);
+                movimentacaoRef.removeEventListener(valueEventListenerMovimentacoes);
                 recuperarMovimentacoes();
 
             }
@@ -294,21 +275,16 @@ public class MotoristaActivity extends AppCompatActivity {
         super.onStop();
         Log.i("Evento", "evento foi removido!");
         usuarioRef.removeEventListener(valueEventListenerUsuario);
-        movimentacaoRef.removeEventListener(valueEventListenerMovimentacoesViagem);
+        movimentacaoRef.removeEventListener(valueEventListenerMovimentacoes);
     }
 
-    public void adicionarReceita(View view) {
-        startActivity(new Intent(this, ReceitasActivity.class));
+    public void adicionarRevisao(View view) {
+        startActivity(new Intent(this, RevisaoActivity.class));
 
     }
 
-    public void adicionarDespesa(View view) {
-        startActivity(new Intent(this, DespesasActivity.class));
+    public void adicionarManuntencao(View view) {
+        startActivity(new Intent(this, ManuntencaoActivity.class));
     }
-
-    public void adicionarViagem(View view) {
-        startActivity(new Intent(this, CadastrarViagemActivity.class));
-    }
-
 
 }

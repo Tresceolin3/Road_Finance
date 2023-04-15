@@ -130,7 +130,7 @@ public class MainActivity extends IntroActivity {
     }
 
     public void abrirTelaMecanico() {
-        startActivity(new Intent(this, MotoristaActivity.class));
+        startActivity(new Intent(this, MecanicoActivity.class));
     }
 
     public void abrirTelaProprietario() {

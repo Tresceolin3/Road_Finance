@@ -112,6 +112,8 @@ public class cadastrarTreeActivity extends AppCompatActivity {
             if (MyApplication.getInstance().getCategoria().equals("Proprietario")) {
                 startActivity(new Intent(this, ProprietarioActivity.class));
             } else if (MyApplication.getInstance().getCategoria().equals("Mecanico")) {
+                startActivity(new Intent(this, MecanicoActivity.class));
+            } else if (MyApplication.getInstance().getCategoria().equals("Motorista")) {
                 startActivity(new Intent(this, MotoristaActivity.class));
             }
 

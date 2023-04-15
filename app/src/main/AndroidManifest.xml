@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.activity.CadastrarViagemActivity"></activity>
+        <activity android:name=".activity.activity.ManuntencaoActivity"></activity>
+        <activity android:name=".activity.activity.RevisaoActivity" />
+        <activity android:name=".activity.activity.MecanicoActivity" />
+        <activity android:name=".activity.activity.CadastrarViagemActivity" />
         <activity android:name=".activity.activity.MotoristaActivity" />
         <activity android:name=".activity.activity.CategoriaUsuarioActivity" />
         <activity android:name=".activity.activity.VincularUsuarioVeiculoActivity" />

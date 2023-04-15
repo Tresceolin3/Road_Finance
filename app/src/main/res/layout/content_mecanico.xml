@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.activity.MotoristaActivity"
-    tools:showIn="@layout/activity_motorista">
+    tools:context=".activity.activity.MecanicoActivity"
+    tools:showIn="@layout/activity_mecanico">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="saldo geral"
+            android:text="valor total gasto"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
@@ -54,7 +54,7 @@
         app:mcv_tileSize="50dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerMovimentoMotorista"
+        android:id="@+id/recyclerMovimentoMecanico"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

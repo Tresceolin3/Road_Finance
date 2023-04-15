@@ -247,7 +247,7 @@ public class ProprietarioActivity extends AppCompatActivity {
     }
 
     public void configuraCalenderView() {
-        CharSequence meses[] = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+            CharSequence meses[] = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
                 "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
         calendarView.setTitleMonths(meses);
         CalendarDay dataAtual = calendarView.getCurrentDate();
